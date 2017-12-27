@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;margin: 0;
+        }
+        li {
+            list-style: none;
+        }
+        body {
+            min-height: 100vh;
+            background: #f5f5f5;
+        }
+        .container {
+            position: relative;
+            width: 830px;
+            height: 48px;
+            line-height: 48px;
+            overflow: hidden;
+            margin: 200px auto 0;
+            border: 1px solid #999;
+            padding: 0 40px;
+            box-sizing: border-box;
+            background: #fff;
+        }
+        .nav-bar {
+            display: flex;
+            position: relative;            
+            height: 48px
+        }
+        .nav-item {
+            width: 150px;
+            flex-shrink: 0;            
+            text-align: center;
+            line-height: 48px;
+            height: 48px;
+            background: #fff;
+        }
+        .slide {
+            position: absolute;
+            transition: left .3s;
+            bottom: 0;
+            left: 0;
+            background: #39f;
+            width: 150px;
+            height: 4px;
+            border-radius: 2px 2px 0 0;
+        }
+        .btn {
+            position: absolute;
+            top: 0;
+            text-align: center;
+            font-style: normal;
+            font-size: 30px;
+            line-height: 48px;
+            height: 48px;
+            width: 40px;
+            background: #fff;
+            display: none;            
+        }
+        .left {
+            left: 0;
+        }
+        .right {
+            right: 0;
+        }
+        .trans {
+            transition: all .5s;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <ul class="nav-bar trans">
+            <li class="nav-item">我是数据1</li>
+            <li class="nav-item">我是数据2</li>
+            <li class="nav-item">我是数据3</li>
+            <li class="nav-item">我是数据4</li>
+            <li class="nav-item">我是数据5</li>
+            <li class="nav-item">我是数据6</li>
+            <li class="nav-item">我是数据7</li>
+            <li class="nav-item">我是数据8</li>
+            <li class="nav-item">我是数据9</li>
+            <li class="nav-item">我是数据0</li>
+            <li class="nav-item">我是数据1</li>
+            <li class="nav-item">我是数据2</li>
+            <li class="nav-item">我是数据3</li>
+            <li class="nav-item">我是数据4</li>
+            <li class="nav-item">我是数据5</li>
+            <li class="nav-item">我是数据1</li>
+            <li class="nav-item">我是数据2</li>
+            <li class="nav-item">我是数据3</li>
+            <li class="nav-item">我是数据4</li>
+            <li class="nav-item">我是数据5</li>
+            <li class="slide"></li>
+        </ul>
+        <i class="btn left">&lt;</i>
+        <i class="btn right">&gt;</i>
+    </div>
+</body>
+<!-- <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.js"></script> -->
+<script>
+    var oUl = document.querySelector('.nav-bar');
+    var aLi = document.querySelectorAll('.nav-item');
+    var oSlide = document.querySelector('.slide');
+    var lBtn = document.querySelector('.left');
+    var rBtn = document.querySelector('.right');
+    var nWidth = aLi.length*aLi[0].offsetWidth;
+    console.log(nWidth)
+
+    for(let i = 0; i < aLi.length; i++){
+        aLi[i].index = i;
+        aLi[i].addEventListener("click", function() {
+            oSlide.style.left = this.index*150 + 'px';
+        })
+    }
+
+    var left = 0;
+    var index = 0;
+    function isHave() {
+        console.log(left)
+        if(left < 0){
+            lBtn.style.display = "block";
+        }
+        else {
+            lBtn.style.display = "none";
+        }
+        
+        if(left <= 0&& left>-nWidth+750) {
+            rBtn.style.display = "block";
+        }
+        else {
+            rBtn.style.display = "none";
+        }
+    }
+    isHave();
+    lBtn.addEventListener('click', function() {
+        index --;
+        left = -index * 750;
+        oUl.style.transform = `translateX(${left}px)`
+        isHave();
+    })
+    rBtn.addEventListener('click', function() {
+        index ++;
+        left = -index * 750;
+        oUl.style.transform = `translateX(${left}px)`
+        isHave();
+    })
+</script>
+</html>
